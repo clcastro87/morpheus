@@ -17,12 +17,13 @@ var path = require('path');
  * It's a prototype to handle configuration settings for a particular environment.
  *
  * @type {Configuration}
+ * @param {Object} defaults Object with default values for configuration.
  * */
-function Configuration(overrides) {
-    overrides = overrides || {};
-    for (var field in overrides) {
-        if (overrides.hasOwnProperty(field)) {
-            this[field] = overrides[field];
+function Configuration(defaults) {
+    defaults = defaults || {};
+    for (var field in defaults) {
+        if (defaults.hasOwnProperty(field)) {
+            this[field] = defaults[field];
         }
     }
 }
@@ -30,7 +31,9 @@ function Configuration(overrides) {
 /**
  * Gets configuration value with default value.
  *
- * @param: configuration New current configuration.
+ * @param {String} key Configuration field.
+ * @param {Object | String | Number} defaultValue If key is not defined, this value is returned.
+ * @returns {Object | String | Number} Configuration value.
  * */
 Configuration.prototype.get = function (key, defaultValue) {
     debug('Getting value for key:', key);
@@ -43,7 +46,7 @@ Configuration.prototype.get = function (key, defaultValue) {
 /**
  * It's a prototype to handle several configuration settings according to its specific environment.
  *
- * @type {Configuration}
+ * @type {ConfigurationManager}
  * */
 function ConfigurationManager() {
     this.configurations = {};
@@ -72,7 +75,7 @@ Object.defineProperty(ConfigurationManager.prototype, 'current', currentProperty
 /**
  * Save configuration file (Sync).
  *
- * @param: filePath File path to save configuration.
+ * @param {String} filePath File path to save configuration.
  * */
 ConfigurationManager.prototype.saveSync = function (filePath) {
     // Select data to save.
@@ -84,8 +87,8 @@ ConfigurationManager.prototype.saveSync = function (filePath) {
 /**
  * Save configuration file.
  *
- * @param: filePath File path to save configuration.
- * @param: callback What do you think.
+ * @param {String} filePath File path to save configuration.
+ * @param {Function} callback Callback with result.
  * */
 ConfigurationManager.prototype.save = function (filePath, callback) {
     // Set default value for callback.
@@ -106,7 +109,7 @@ ConfigurationManager.prototype.save = function (filePath, callback) {
 /**
  * Open configuration file. (Sync)
  *
- * @param: filePath Configuration file path.
+ * @param {String} filePath Configuration file path.
  * */
 ConfigurationManager.prototype.openSync = function (filePath) {
     // Know saving path.
@@ -124,8 +127,8 @@ ConfigurationManager.prototype.openSync = function (filePath) {
 /**
  * Open configuration file.
  *
- * @param: filePath If passed, configuration will be saved to this file.
- * @param: callback What do you think.
+ * @param {String} filePath Configuration file path.
+ * @param {Function} callback Callback with result.
  * */
 ConfigurationManager.prototype.open = function (filePath, callback) {
     // Set default value for callback.
@@ -161,7 +164,7 @@ ConfigurationManager.prototype.open = function (filePath, callback) {
 /**
  * Setup configuration environments. (Sync)
  *
- * @param: configurations Configuration environment settings.
+ * @param {Object} configurations Object with configuration environment settings.
  * */
 ConfigurationManager.prototype._setupConfigurations = function (configurations) {
     var defaultEnv = 'default';
@@ -180,7 +183,7 @@ ConfigurationManager.prototype._setupConfigurations = function (configurations) 
 /**
  * Initialize a Configuration Manager. (Sync)
  *
- * @param: path Configuration file.
+ * @param {String} filePath Path to configuration file.
  * */
 function initialize(filePath) {
     filePath = filePath || path.join(process.cwd(), '/config.json');
