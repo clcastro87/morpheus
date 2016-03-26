@@ -53,33 +53,20 @@ function ConfigurationManager() {
     debug('Current environment:', this.environment);
 }
 
-/**
- * Gets current configuration.
- *
- * */
-function getCurrent() {
-    debug('Getting current configuration.');
-    return this.configurations[this.environment];
-}
-
-/**
- * Sets current configuration.
- *
- * @param: configuration New current configuration.
- * */
-function setCurrent(configuration) {
-    debug('Setting current configuration.');
-    this.configurations[this.environment] = configuration instanceof Configuration
-        ? configuration
-        : new Configuration(configuration);
-}
-
 var currentProperty = {
     enumerable: true,
     configurable: true,
-    get: getCurrent,
-    set: setCurrent
+    get: function () {
+        debug('Getting current configuration.');
+        return this.configurations[this.environment];
+    },
+    set: function (configuration) {
+        debug('Setting current configuration.');
+        this.configurations[this.environment] = configuration instanceof Configuration ? configuration
+            : new Configuration(configuration);
+    }
 };
+
 Object.defineProperty(ConfigurationManager.prototype, 'current', currentProperty);
 
 /**
@@ -91,7 +78,7 @@ ConfigurationManager.prototype.saveSync = function (filePath) {
     // Select data to save.
     var data2Save = this.configurations;
     // Write file then, if callback, return when finished.
-    fs.writeFileSync(filePath, JSON.stringify(data2Save, null, "  "));
+    fs.writeFileSync(filePath, JSON.stringify(data2Save, null, '  '));
 };
 
 /**
@@ -111,7 +98,7 @@ ConfigurationManager.prototype.save = function (filePath, callback) {
             return callback(err);
         }
         // Write file then, if callback, return when finished.
-        fs.writeFile(savePath, JSON.stringify(data2Save, null, "  "), callback);
+        fs.writeFile(savePath, JSON.stringify(data2Save, null, '  '), callback);
     });
 };
 
@@ -124,7 +111,8 @@ ConfigurationManager.prototype.openSync = function (filePath) {
     // Know saving path.
     var openPath = fs.realpathSync(filePath);
     // Check if file exists and permissions
-    fs.accessSync(openPath, fs.F_OK | fs.R_OK);
+    /* jshint -W016 */
+    fs.accessSync(openPath, (fs.F_OK | fs.R_OK));
     // Read configuration
     var allConfigurations = require(openPath);
     // Setup configurations
@@ -150,6 +138,7 @@ ConfigurationManager.prototype.open = function (filePath, callback) {
         }
         try {
             // Check if file exists and the process is able to read it.
+            /* jshint -W016 */
             fs.access(openPath, fs.F_OK | fs.R_OK, function (err) {
                 if (err) {
                     return callback(err);

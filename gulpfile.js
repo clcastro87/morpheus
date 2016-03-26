@@ -15,7 +15,7 @@ gulp.task('vet', function () {$.jshint();
 	log('Analyzing source with JSHint and JSCS');
 
 	return gulp
-		.src('src/middleware.js')
+		.src('src/**/*.js')
 		//.pipe($.if(args.verbose, $.print()))
 		.pipe($.jshint())
 		.pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
