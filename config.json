@@ -1,0 +1,14 @@
+{
+  "default": {
+    "cookieSecret": "M0rPh3u553cR3T",
+    "db": "mongodb://localhost/morpheus_test"
+  },
+  "development": {
+    "db": "mongodb://localhost/morpheus_dev"
+  },
+  "production": {
+    "db": "mongodb://localhost/morpheus"
+  },
+  "testing": {
+  }
+}
