@@ -18,8 +18,8 @@ var path = require('path');
  *
  * @type {Configuration}
  * */
-function Configuration(environment, overrides) {
-    this.environment = environment;
+function Configuration(overrides) {
+    overrides = overrides || {};
     for (var field in overrides) {
         if (overrides.hasOwnProperty(field)) {
             this[field] = overrides[field];
@@ -48,7 +48,7 @@ Configuration.prototype.get = function(key, defaultValue) {
 function ConfigurationManager() {
     this.configurations = {};
     this.environment = (process.env && process.env.NODE_ENV) || 'development';
-    this.configurations[this.environment] = new Configuration(this.environment, {});
+    this.configurations[this.environment] = new Configuration();
     debug('Creating ConfigurationManager');
     debug('Current environment:', this.environment);
 }
@@ -71,7 +71,7 @@ function setCurrent(configuration) {
     debug('Setting current configuration.');
     this.configurations[this.environment] = configuration instanceof Configuration
         ? configuration
-        : new Configuration(this.environment, configuration);
+        : new Configuration(configuration);
 }
 
 var currentProperty = {
@@ -181,7 +181,7 @@ ConfigurationManager.prototype._setupConfigurations = function (configurations) 
     for (var env in configurations) {
         if (configurations.hasOwnProperty(env)) {
             var environmentConfig = _.merge({}, defaultConfig, configurations[env]);
-            this.configurations[env] = new Configuration(env, environmentConfig);
+            this.configurations[env] = new Configuration(environmentConfig);
         }
     }
 };

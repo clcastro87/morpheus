@@ -12,11 +12,10 @@ describe('Configuration Manager', function () {
     it('Configuration constructor', function () {
         expect(Configuration).to.not.null();
         expect(Configuration).to.be.a('function');
-        var instance = new Configuration('development', {foo: 'bar'});
+        var instance = new Configuration({foo: 'bar'});
         expect(instance).to.not.null();
         expect(instance).to.be.a('object');
         expect(instance).to.be.an.instanceOf(Configuration);
-        expect(instance).to.have.property('environment').and.equal('development');
         expect(instance).to.have.property('foo').and.equal('bar');
         expect(instance).to.respondTo('get');
         expect(instance.get('foo')).to.be.eql('bar');
