@@ -32,7 +32,7 @@ function Configuration(overrides) {
  *
  * @param: configuration New current configuration.
  * */
-Configuration.prototype.get = function(key, defaultValue) {
+Configuration.prototype.get = function (key, defaultValue) {
     debug('Getting value for key:', key);
     if (defaultValue) {
         debug('Default value for key:', defaultValue);
@@ -89,7 +89,8 @@ ConfigurationManager.prototype.saveSync = function (filePath) {
  * */
 ConfigurationManager.prototype.save = function (filePath, callback) {
     // Set default value for callback.
-    callback = callback || function () {};
+    callback = callback || function () {
+        };
     // Select data to save.
     var data2Save = this.configurations;
     // Know saving path.
@@ -128,7 +129,8 @@ ConfigurationManager.prototype.openSync = function (filePath) {
  * */
 ConfigurationManager.prototype.open = function (filePath, callback) {
     // Set default value for callback.
-    callback = callback || function () {};
+    callback = callback || function () {
+        };
     // Save instance reference
     var self = this;
     // Know saving path.
