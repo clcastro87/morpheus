@@ -21,7 +21,7 @@ module.exports = errorHandler;
 
 function errorHandler(err, req, res, next) {
     if (err) {
-        var body =  err.message || err;
+        var body = err.message || err;
         var status = err.statusCode || 500;
         // Avoid sending custom error messages in production
         if ('development' !== environment && status === 500) {
@@ -35,24 +35,24 @@ function errorHandler(err, req, res, next) {
 function logError(err, status, body) {
     // If environment is development then log to console
     if ('development' === environment) {
-        // Execute task after response
+        // Execute task in next iteration of the event loop.
         process.nextTick(log);
     }
 
-    function log(){
+    function log() {
         var stack = '';
-        var msg = '\n--------------\n'+status + ' - ' + body;
+        var msg = '\n--------------\n' + status + ' - ' + body;
         // log all inner errors too
-        while(err) {
+        while (err) {
             stack = err.stack || stack; // get deepest stack
             err = err.innerError;
-            if (err && err.message){
-                msg += '\n'+err.message;
+            if (err && err.message) {
+                msg += '\n' + err.message;
             }
         }
         // log deepest stack
-        if(stack) {
-            msg += '\n'+stack;
+        if (stack) {
+            msg += '\n' + stack;
         }
         //console.error(msg+'\n--------------');
         msg += '\n--------------';
