@@ -7,7 +7,7 @@
 // Module requires
 var winston = require('winston');
 var path = require('path');
-var config = require('config');
+var config = require('./config');
 var _ = require('lodash');
 var helpers = require('../helpers');
 
