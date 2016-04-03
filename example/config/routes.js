@@ -9,5 +9,7 @@ var api = morpheus(router);
 var helloController = require('../controllers/hello');
 
 router.get('/hello', morpheus.cache.public(3600), helloController.hello);
+router.post('/hello', helloController.postTest);
+router.put('/hello', helloController.putTest);
 
 module.exports = api;

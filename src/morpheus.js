@@ -4,6 +4,7 @@
  */
 
 var express = require('express');
+var _ = require('lodash');
 var errorHandler = require('./lib/errorHandler');
 var notFound = require('./lib/notFound');
 var dispatcher = require('./lib/dispatcher');
@@ -11,6 +12,8 @@ var cache = require('./lib/cache');
 var compression = require('compression');
 var helmet = require('helmet');
 var cors = require('cors');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 function setPoweredBy(poweredBy) {
     if (poweredBy) {
@@ -60,6 +63,39 @@ function setCrossOrigin(options) {
     return cors(options);
 }
 
+function setBodyParser(app, options) {
+    var defaultOptions = {
+        json: {
+            limit: '100kb',
+            strict: true
+        },
+        urlencoded: {
+            extended: true,
+            limit: '100kb',
+            parameterLimit: 150
+        }
+    };
+    var currentOptions = _.defaults(options || {}, defaultOptions);
+    Object.keys(currentOptions).forEach(function (key) {
+        var parserOptions = currentOptions[key];
+        if (!!parserOptions) {
+            app.use(bodyParser[key](parserOptions));
+        }
+    });
+}
+
+function setMethodOverride(key) {
+    if (key === false) {
+        return function (req, res, next) {
+            next();
+        };
+    }
+    if (key === true) {
+        key = '_method';
+    }
+    return methodOverride(key);
+}
+
 function morpheus(router, options) {
     options = options || {};
 
@@ -77,6 +113,12 @@ function morpheus(router, options) {
 
     // Set cross origin
     app.use(setCrossOrigin(options.cors));
+
+    // Set body parser
+    setBodyParser(app, options.bodyParser);
+
+    // Set method override
+    app.use(setMethodOverride(options.methodOverride));
 
     // Set dispatcher
     app.use(dispatcher());
@@ -98,3 +140,5 @@ exports.cache = cache;
 exports.compression = compression;
 exports.helmet = helmet;
 exports.cors = cors;
+exports.bodyParser = bodyParser;
+exports.methodOverride = methodOverride;

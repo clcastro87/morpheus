@@ -15,3 +15,22 @@ exports.hello = function (req, res, next) {
     //next(new Error('aaa'));
     //next();
 };
+
+exports.postTest = function (req, res, next) {
+
+    function test(done) {
+        done(null, {hello: req.body});
+    }
+
+    res.dispatch(test);
+};
+
+
+exports.putTest = function (req, res, next) {
+
+    function test(done) {
+        done(null, {put: req.body});
+    }
+
+    res.dispatch(test);
+};
