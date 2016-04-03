@@ -34,6 +34,17 @@ describe('Http Status Handler', function () {
         done();
     });
 
+    it('instance toString method', function (done) {
+        var httpStatus = Status.byCode(200);
+        expect(httpStatus).to.not.null();
+        expect(httpStatus).to.be.a('object');
+        expect(httpStatus).to.have.property('code');
+        expect(httpStatus).to.have.property('description');
+        expect(httpStatus).to.respondTo('toString');
+        expect(httpStatus.toString()).to.be.eql(httpStatus.description);
+        done();
+    });
+
     it('status OK', function (done) {
         var httpStatus = Status.OK;
         expect(httpStatus).to.not.null();

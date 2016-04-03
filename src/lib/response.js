@@ -2,7 +2,6 @@
  * Generates API service output
  *
  * @author: Carlos Luis Castro Márquez
- * @copyright: Spissa Software Solutions
  * @date: 03/07/2015
  */
 (function (response) {
@@ -13,6 +12,7 @@
     response.error = error;
     response.makeResponse = makeResponse;
     response.fromCallback = fromCallback;
+    response.fromHttpStatus = fromHttpStatus;
 
     /**
      * Gives a success API response
@@ -36,9 +36,9 @@
     /**
      * Gives a custom API response
      *
-     * @param: result Object to put in response.result
-     * @param: code Error code. It could be a HTTP status code.
-     * @param: description Error description. It could be a HTTP status description.
+     * @param {Object|String|Number} result Object to put in response.result
+     * @param {Number} code Error code. It could be a HTTP status code.
+     * @param {String} description Error description. It could be a HTTP status description.
      * */
     function makeResponse(result, code, description) {
         return {
@@ -55,14 +55,28 @@
      * If an error is sent as first parameter, then is a response error,
      * otherwise returns a success response.
      *
-     * @param: err Callback error.
-     * @param: result Callback result.
+     * @param {Error} err Callback error, if code is set then result is an empty object.
+     * @param {Object} result Callback result.
      * */
     function fromCallback(err, result) {
         if (err) {
             return error(err.statusCode || 500, err.message || 'Internal Server Error');
         }
         return success(result);
+    }
+
+    /**
+     * Builds an automatic response based on HttpStatus Object.
+     * Also you can send a customized error if description param is set.
+     *
+     * @param {Status} status Http status.
+     * @param {String} result Callback result.
+     * */
+    function fromHttpStatus(status, result) {
+        if (status.code >= 400) {
+            return error(status.code || 500, status.toString());
+        }
+        return makeResponse(result, status.code, status.description);
     }
 
 })(module.exports);

@@ -18,6 +18,10 @@ function Status(code, description) {
     this.description = description || 'OK';
 }
 
+Status.prototype.toString = function () {
+    return this.description;
+};
+
 Status.byCode = getInstance;
 // Codes abbreviation
 Status.OK = getInstance(200);
