@@ -9,7 +9,7 @@ var Status = require('./status');
 module.exports = function(config) {
 
     function dispatcher(req, res, next) {
-        res.dispatch = dispatch.bind({ request: req, response: res, next: next });
+        res.dispatch = dispatch.bind({request: req, response: res, next: next});
         next();
     }
 
