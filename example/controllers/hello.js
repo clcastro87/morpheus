@@ -3,6 +3,8 @@
  * Created by Carlos on 4/3/2016.
  */
 
+var Promise = require('bluebird');
+
 exports.hello = function (req, res, next) {
     //res.send('aaaaaaaaaaa');
 
@@ -10,7 +12,10 @@ exports.hello = function (req, res, next) {
         done(null, {hello: 'world'});
     }
 
-    res.dispatch(test);
+    res.dispatch(new Promise(function (resolve, reject) {
+        //reject(new Error('Hoa'));
+        resolve({pepe: 'lola'});
+    }));
     //res.dispatch(new Error('nsnsnsns'));
     //next(new Error('aaa'));
     //next();

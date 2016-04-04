@@ -46,6 +46,9 @@ module.exports = function(config) {
                     requestHandler.next(err);
                 });
         }
+        else if (typeof args[0] === 'object') {
+            responder(response.fromHttpStatus(Status.OK, args[0]));
+        }
         else {
             responder(response.fromHttpStatus(Status.NOT_IMPLEMENTED));
         }
