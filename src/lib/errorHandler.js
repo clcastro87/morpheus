@@ -15,7 +15,6 @@
 
 var logger = require('./logger')(module);
 var response = require('./response');
-//var environment = require('./config').environment;
 var environment = process.env.NODE_ENV || 'development';
 
 module.exports = errorHandler;
@@ -28,7 +27,7 @@ function errorHandler(err, req, res, next) {
         if ('development' !== environment && status === 500) {
             body = 'Internal Server Error';
         }
-        res.status(status).send(response.error(status, body));
+        res.status(status).send(response.error(status, body)).end();
         logError(err, status, body);
     }
 }
