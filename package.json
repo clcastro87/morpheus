@@ -1,7 +1,7 @@
 {
-  "name": "express-tongue",
-  "version": "1.0.0",
-  "description": "Localization library for Express. It works with every template engine and exposes a json endpoint to consume on client side.",
+  "name": "morpheus",
+  "version": "0.0.1",
+  "description": "REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
     "test": "mocka tests/suite",
@@ -9,21 +9,22 @@
   },
   "keywords": [
     "express",
-    "localization",
-    "i18n",
-    "language",
-    "tongue"
+    "api",
+    "rest",
+    "cache",
+    "promise"
   ],
   "author": "Carlos Luis Castro Márquez <carlosluiscastro@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clcastro87/express-tongue"
+    "url": "https://github.com/clcastro87/morpheus"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "dependencies": {
+    "bluebird": "^3.3.4",
     "lodash": "^2.4.1",
     "express": "^4.9.3",
     "compression": "^1.6.0",
