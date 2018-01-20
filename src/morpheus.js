@@ -96,7 +96,8 @@ function setMethodOverride(key) {
     return methodOverride(key);
 }
 
-function morpheus(router, options) {
+function morpheus(options) {
+
     options = options || {};
 
     // Create express app.
@@ -124,6 +125,7 @@ function morpheus(router, options) {
     app.use(dispatcher());
 
     // Set inner router
+    var router = express.Router();
     app.use(router);
 
     // Set 404
@@ -131,7 +133,7 @@ function morpheus(router, options) {
     // Set error handler
     app.use(errorHandler);
 
-    return app;
+    return {app: app, router: router};
 }
 
 // Module exports

@@ -3,22 +3,23 @@
  * Created by Carlos on 4/3/2016.
  */
 
-var Promise = require('bluebird');
+exports.promiseHello = function (req, res, next) {
+    var Promise = require('bluebird');
 
-exports.hello = function (req, res, next) {
-    //res.send('aaaaaaaaaaa');
-
-    function test(done) {
-        done(null, {hello: 'world'});
-    }
-
-    res.dispatch(new Promise(function (resolve, reject) {
+    var promise = new Promise(function (resolve, reject) {
         //reject(new Error('Hoa'));
         resolve({hello: 'world'});
-    }));
-    //res.dispatch(new Error('nsnsnsns'));
-    //next(new Error('aaa'));
-    //next();
+    });
+    res.dispatch(promise);
+};
+
+exports.promiseHelloError = function (req, res, next) {
+    var Promise = require('bluebird');
+
+    var promise = new Promise(function (resolve, reject) {
+        reject(new Error('Upps!!, I got an error'));
+    });
+    res.dispatch(promise);
 };
 
 exports.exception = function (req, res, next) {
