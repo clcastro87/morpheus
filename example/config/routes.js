@@ -11,4 +11,8 @@ var promiseRoutes = require('../routes/promise');
 router.get('/promise/test', promiseRoutes.promiseTest);
 router.get('/promise/error', promiseRoutes.promiseTestError);
 
+var callbackRoutes = require('../routes/callback');
+router.get('/callback/test', callbackRoutes.callbackTest);
+router.get('/callback/error', callbackRoutes.callbackTestError);
+
 module.exports = api.app;
