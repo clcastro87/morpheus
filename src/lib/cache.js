@@ -55,7 +55,7 @@
     }
 
     function parseTTL(ttl) {
-        return isNaN(ttl) ? ms(ttl) : (ttl || defaultTTL);
+        return isNaN(ttl) ? ms(ttl) / 1000 : (ttl || defaultTTL);
     }
 
 })(module.exports);
