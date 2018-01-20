@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 var Controller = require('../../index').Controller;
 
 function HomeController(router) {
@@ -9,7 +10,11 @@ HomeController.prototype.get = function() {
 }
 
 HomeController.prototype.getItem = function(id) {
-    return {hola: id};
+    var promise = new Promise(function (resolve, reject) {
+        resolve({hola: id});
+    });
+
+    return promise;
 }
 
 
