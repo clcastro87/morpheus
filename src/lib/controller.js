@@ -11,7 +11,7 @@ function Controller(router) {
     props = props.filter((p) => {
         if (p === 'constructor')
             return false;
-        return !(typeof classProto[p] == 'Function');
+        return (typeof classProto[p] == 'function');
     });
 
     for (var i = 0; i < props.length; i++) {
