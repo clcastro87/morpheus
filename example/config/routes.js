@@ -10,6 +10,7 @@ var router = api.router;
 var helloController = require('../controllers/hello');
 router.get('/hello', morpheus.cache.public(3600), helloController.hello);
 router.get('/exception', helloController.exception);
+router.get('/error', helloController.exception2);
 
 var promiseController = require('../controllers/promise');
 router.get('/promise/test', promiseController.promiseTest);
