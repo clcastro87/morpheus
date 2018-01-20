@@ -19,21 +19,31 @@ function Controller(router) {
     }
 
     function route(prop) {
+        // TODO: Camelcasing fix
         var methods = ['get', 'post', 'put', 'del'];
         var method = 'get';
         var routeAddition = '';
         if (methods.indexOf(prop) >= 0) {
             method = prop;
         }
+        else if (prop == 'getItem') {
+            method = 'get';
+        }
         else {
             // for now
             routeAddition = '/' + prop;
         }
-        console.log('register route for:', method, baseRoute + routeAddition);
-        router[method](baseRoute + routeAddition, function (req, res, next) {
-            // TODO: params are missing
-            var params = [];
-            res.dispatch(classProto[prop].apply({request: req, response: res}, params));
+        var fnDec = classProto[prop].toString();
+        var paramsMatch = fnDec.match(/\(([\w,\s]+)\)/);
+        var params = (paramsMatch && paramsMatch.index && paramsMatch[1]) 
+            ? paramsMatch[1].split(/\s*,\s*/) 
+            : [];
+        var url = baseRoute + routeAddition;
+        url += params.map((p) => '/:' + p).join('');
+        console.log('register route for:', method, url);
+        router[method](url, function (req, res, next) {
+            var vals = params.map(p => req.params[p]);
+            res.dispatch(classProto[prop].apply({request: req, response: res}, vals));
         });
     }
 }
