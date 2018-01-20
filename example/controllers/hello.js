@@ -21,6 +21,10 @@ exports.hello = function (req, res, next) {
     //next();
 };
 
+exports.exception = function (req, res, next) {
+    throw new Error("This is an error");
+};
+
 exports.postTest = function (req, res, next) {
 
     function test(done) {

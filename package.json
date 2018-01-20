@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocka tests/suite",
-    "start": "node tests/server.js"
+    "start": "node example/app.js"
   },
   "keywords": [
     "express",
