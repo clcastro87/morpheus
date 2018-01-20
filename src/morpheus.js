@@ -96,6 +96,22 @@ function setMethodOverride(key) {
     return methodOverride(key);
 }
 
+function useControllers(path) {
+    var fs = require('fs');
+    var rPath = fs.realpathSync(path);
+    var files = fs.readdirSync(rPath);
+
+    var router = express.Router();
+
+    for (var i = 0; i < files.length; i++){
+        var cPath = fs.realpathSync(rPath + '/' + files[i]);
+        var mod = require(cPath);
+        new mod(router);
+    }
+
+    return router;
+}
+
 function morpheus(options) {
 
     options = options || {};
@@ -133,7 +149,7 @@ function morpheus(options) {
     // Set error handler
     app.use(errorHandler);
 
-    return {app: app, router: router};
+    return {app: app, router: router, useControllers: useControllers};
 }
 
 // Module exports
@@ -144,3 +160,5 @@ exports.helmet = helmet;
 exports.cors = cors;
 exports.bodyParser = bodyParser;
 exports.methodOverride = methodOverride;
+exports.Controller = require('./lib/controller');
+exports.Status = require('./lib/status');

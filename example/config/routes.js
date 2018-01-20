@@ -15,4 +15,6 @@ var callbackRoutes = require('../routes/callback');
 router.get('/callback/test', callbackRoutes.callbackTest);
 router.get('/callback/error', callbackRoutes.callbackTestError);
 
+router.use('/', api.useControllers(__dirname + '/../controllers'));
+
 module.exports = api.app;
