@@ -1,19 +1,14 @@
-/**
- * Copyright 2016
- * Created by Carlos on 4/3/2016.
- */
-
 var morpheus = require('../../index');
 var api = morpheus();
 var router = api.router;
 
-var helloController = require('../controllers/hello');
-router.get('/hello', morpheus.cache.public(3600), helloController.hello);
-router.get('/exception', helloController.exception);
-router.get('/error', helloController.exception2);
+var helloRoutes = require('../routes/hello');
+router.get('/hello', morpheus.cache.public(3600), helloRoutes.hello);
+router.get('/exception', helloRoutes.exception);
+router.get('/error', helloRoutes.exception2);
 
-var promiseController = require('../controllers/promise');
-router.get('/promise/test', promiseController.promiseTest);
-router.get('/promise/error', promiseController.promiseTestError);
+var promiseRoutes = require('../routes/promise');
+router.get('/promise/test', promiseRoutes.promiseTest);
+router.get('/promise/error', promiseRoutes.promiseTestError);
 
 module.exports = api.app;
