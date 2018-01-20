@@ -23,7 +23,5 @@ function fourOFour(req, res) {
         message = internalMessage;
         logger.error(internalMessage);
     }
-    res.status(404).send(
-        response.error(404, message)
-    ).end();
+    res.status(404).send(response.error(404, message)).end();
 }

@@ -1,7 +1,7 @@
 {
   "name": "morpheus",
   "version": "0.0.1",
-  "description": "REST API, built in the right way.",
+  "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
     "test": "mocka tests/suite",
