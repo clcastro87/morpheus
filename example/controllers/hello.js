@@ -14,7 +14,7 @@ exports.hello = function (req, res, next) {
 
     res.dispatch(new Promise(function (resolve, reject) {
         //reject(new Error('Hoa'));
-        resolve({pepe: 'lola'});
+        resolve({hello: 'world'});
     }));
     //res.dispatch(new Error('nsnsnsns'));
     //next(new Error('aaa'));
