@@ -15,7 +15,6 @@
 
 var logger = require('./logger')(module);
 var response = require('./response');
-//var environment = require('./config').environment;
 var environment = process.env.NODE_ENV || 'development';
 
 module.exports = errorHandler;
