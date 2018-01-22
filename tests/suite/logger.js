@@ -1,8 +1,3 @@
-/**
- * Copyright 2016
- * Created by Carlos on 3/28/2016.
- */
-
 var expect = require('chai').expect;
 var logger = require('../../src/lib/logger');
 var winston = require('winston');

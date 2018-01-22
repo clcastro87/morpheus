@@ -1,8 +1,3 @@
-/**
- * Copyright 2016
- * Created by Carlos on 4/3/2016.
- */
-
 var response = require('./response');
 var Status = require('./status');
 

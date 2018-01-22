@@ -2,7 +2,6 @@
  * Status handler.
  *
  * @author: Carlos Luis Castro Márquez
- * @date: 03/21/2015
  */
 'use strict';
 

@@ -2,6 +2,7 @@
  * Cache middleware.
  *
  * @author: Carlos Luis Castro Márquez
+ * @deprecated Change for express-cache-ctrl
  * @date: 12/18/2015
  */
 (function (cache) {
