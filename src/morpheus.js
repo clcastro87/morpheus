@@ -1,14 +1,16 @@
+// External modules
 var express = require('express');
 var _ = require('lodash');
-var errorHandler = require('./lib/errorHandler');
-var notFound = require('./lib/notFound');
-var dispatcher = require('./lib/dispatcher');
-var cache = require('./lib/cache');
+var cache = require('express-cache-ctrl');
 var compression = require('compression');
 var helmet = require('helmet');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+// Local modules
+var errorHandler = require('./lib/errorHandler');
+var notFound = require('./lib/notFound');
+var dispatcher = require('./lib/dispatcher');
 
 function setPoweredBy(poweredBy) {
     if (poweredBy) {
