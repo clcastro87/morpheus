@@ -18,7 +18,6 @@
       "allowRegex": true
     },
     "validateIndentation": 4,
-    /*"validateQuoteMarks": "'",*/
 
     "disallowMixedSpacesAndTabs": true,
     "disallowTrailingWhitespace": true,
