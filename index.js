@@ -1,8 +1,7 @@
 /**
- * Copyright 2016
- * Created by Carlos on 4/3/2016.
+ * Module entry point.
+ *
+ * @author: Carlos Luis Castro Márquez
  */
-
 'use strict';
-
 module.exports = require('./src/morpheus');
