@@ -4,7 +4,7 @@
   "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
-    "test": "mocka tests/suite",
+    "test": "mocha tests/suite",
     "start": "node example/app.js"
   },
   "keywords": [
