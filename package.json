@@ -1,6 +1,6 @@
 {
   "name": "morpheus",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,8 @@
     "body-parser": "^1.8.2",
     "helmet": "^0.15.0",
     "cors": "^2.4.1",
-    "method-override": "^1.0.2"
+    "method-override": "^1.0.2",
+    "express-cache-ctrl": "^1.0.1"
   },
   "devDependencies": {
     "debug": "^2.0.0",
