@@ -105,6 +105,7 @@ function useControllers(path) {
 
     for (var i = 0; i < files.length; i++){
         var cPath = fs.realpathSync(rPath + '/' + files[i]);
+        // TODO: Filter js files
         var mod = require(cPath);
         new mod(router);
     }
