@@ -1,6 +1,6 @@
 {
   "name": "morpheus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "url": "https://github.com/clcastro87/morpheus"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.0.0"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
