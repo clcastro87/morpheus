@@ -1,8 +1,3 @@
-/**
- * Copyright 2016
- * Created by Carlos on 4/3/2016.
- */
-
 var express = require('express');
 var _ = require('lodash');
 var errorHandler = require('./lib/errorHandler');

@@ -2,7 +2,6 @@
  * Generates consistent API service output
  *
  * @author: Carlos Luis Castro Márquez
- * @date: 03/07/2015
  */
 (function (response) {
     'use strict';

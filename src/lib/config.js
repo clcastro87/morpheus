@@ -2,7 +2,6 @@
  * Allows to handle json a configuration file.
  *
  * @author: Carlos Luis Castro Márquez
- * @date: 03/26/2016
  */
 'use strict';
 var DEBUG_SIGNATURE = 'morpheus.config';

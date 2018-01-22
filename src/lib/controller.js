@@ -1,4 +1,4 @@
-
+'use strict';
 function Controller(router) {
     var classProto = Object.getPrototypeOf(this);
     var className = classProto['constructor'].name;
