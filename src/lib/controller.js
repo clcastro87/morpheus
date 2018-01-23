@@ -20,10 +20,13 @@ function Controller(router) {
             return false;
         return (typeof classProto[p] == 'function');
     });
-    props.forEach(route);
+    
+    var routeMappings = props.map(mapPropToRoute);
+    routeMappings = routeMappings.sort(rm => rm.params && rm.params.length);
+    routeMappings.forEach(enroute);
 
-    function route(prop) {
-        debug('Registering route for fn: ' + prop);
+    function mapPropToRoute(prop) {
+        debug('Generating route for fn: ' + prop);
         var methods = ['get', 'post', 'put', 'del'];
         var method = 'get';
         var routeAddition = '';
@@ -43,12 +46,20 @@ function Controller(router) {
             ? paramsMatch[1].split(/\s*,\s*/) 
             : [];
         var url = baseRoute + routeAddition;
-        url += params.map((p) => '/:' + p).join('');
-        debug('register route for verb: ' + method + ', url = ' + url);
-        router[method](url, function (req, res, next) {
-            var vals = params.map(p => req.params[p]);
-            debug('Dispatching request to: ' + className + '/' + prop + ', with params: ' + vals);
-            res.dispatch(classProto[prop].apply({request: req, response: res}, vals));
+        return {
+            url: url += params.map((p) => '/:' + p).join(''),
+            params: params,
+            method: method,
+            prop: prop
+        }
+    }
+
+    function enroute(routeDef) {
+        debug('register route for verb: ' + routeDef.method + ', url = ' + routeDef.url);
+        router[routeDef.method](routeDef.url, function (req, res, next) {
+            var vals = routeDef.params.map(p => req.params[p]);
+            debug('Dispatching request to: ' + className + '/' + routeDef.prop + ', with params: ' + vals);
+            res.dispatch(classProto[routeDef.prop].apply({request: req, response: res}, vals));
         });
     }
 }

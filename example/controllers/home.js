@@ -18,5 +18,14 @@ HomeController.prototype.getItem = function(id) {
     return promise;
 }
 
+HomeController.prototype.findUser = function() {
+    var request = this.request;
+    var name = request.query.name || '';
+    var promise = new Promise(function (resolve, reject) {
+        resolve({username: name});
+    });
+
+    return promise;
+}
 
 module.exports = HomeController;
