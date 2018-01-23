@@ -20,10 +20,20 @@ function Controller(router) {
             return false;
         return (typeof classProto[p] == 'function');
     });
-    
+
     var routeMappings = props.map(mapPropToRoute);
-    routeMappings = routeMappings.sort(rm => rm.params && rm.params.length);
+    routeMappings = routeMappings.sort(intelligentRouteSort);
     routeMappings.forEach(enroute);
+
+    function intelligentRouteSort(r1, r2) {
+        if (!r1.params || !r1.params.length)
+            return -1;
+        if (!r2.params || !r2.params.length)
+            return 1;
+        if (r1.params.length == r2.params.length)
+            return 0;
+        return r1.params.length > r2.params.length ? -1 : 1;
+    }
 
     function mapPropToRoute(prop) {
         debug('Generating route for fn: ' + prop);
