@@ -15,15 +15,17 @@ function Controller(router) {
     var baseRoute = '/' + controlRoute;
     debug('Registering controller base route: ' + baseRoute);
     var props = Object.getOwnPropertyNames(classProto);
-    props = props.filter((p) => {
-        if (p === 'constructor')
-            return false;
-        return (typeof classProto[p] == 'function');
-    });
+    props = props.filter(ignoreNonFunctions);
 
     var routeMappings = props.map(mapPropToRoute);
     routeMappings = routeMappings.sort(intelligentRouteSort);
     routeMappings.forEach(enroute);
+
+    function ignoreNonFunctions(p) {
+        if (p === 'constructor')
+            return false;
+        return (typeof classProto[p] == 'function');
+    }
 
     function intelligentRouteSort(r1, r2) {
         if (!r1.params || !r1.params.length)
@@ -57,7 +59,7 @@ function Controller(router) {
             : [];
         var url = baseRoute + routeAddition;
         return {
-            url: url += params.map((p) => '/:' + p).join(''),
+            url: url += params.map(p => '/:' + p).join(''),
             params: params,
             method: method,
             prop: prop
