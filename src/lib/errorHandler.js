@@ -11,11 +11,16 @@
  *    - if err.stack, logs the stack trace to console
  *
  * @type {errorHandler}
+ * @author: Carlos Luis Castro Márquez
+ * 
  ************************/
 
-var logger = require('./logger')(module);
 var response = require('./response');
-var environment = process.env.NODE_ENV || 'development';
+var debug = require('debug');
+const DEBUG_SIGNATURE = 'morpheus.middleware.error';
+var error = debug(DEBUG_SIGNATURE);
+error.log = console.error.bind(console);
+var environment = (process.env && process.env.NODE_ENV) || 'development';
 
 module.exports = errorHandler;
 
@@ -27,9 +32,20 @@ function errorHandler(err, req, res, next) {
         if ('development' !== environment && status === 500) {
             body = 'Internal Server Error';
         }
-        res.status(status).send(response.error(status, body)).end();
+        if (res.headersSent) {
+            return res.end();
+        }
+        else {
+            res
+                .status(status)
+                .send(response.error(status, body))
+                .end();
+        }        
         logError(err, status, body);
     }
+    else {
+        res.end();
+    }    
 }
 
 function logError(err, status, body) {
@@ -41,7 +57,7 @@ function logError(err, status, body) {
 
     function log() {
         var stack = '';
-        var msg = '\n--------------\n' + status + ' - ' + body;
+        var msg = /*'\n--------------\n' + */status + ' - ' + body;
         // log all inner errors too
         while (err) {
             stack = err.stack || stack; // get deepest stack
@@ -56,6 +72,7 @@ function logError(err, status, body) {
         }
         //console.error(msg+'\n--------------');
         msg += '\n--------------';
-        logger.error(msg);
+        //logger.error(msg);
+        error(msg);
     }
 }
