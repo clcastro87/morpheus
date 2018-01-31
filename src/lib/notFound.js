@@ -8,7 +8,7 @@
  ************************/
 
 var response = require('./response');
-const DEBUG_SIGNATURE = 'morpheus.middleware.404';
+const DEBUG_SIGNATURE = 'morpheus.middleware.notFound';
 var debug = require('debug')(DEBUG_SIGNATURE);
 var environment = (process.env && process.env.NODE_ENV) || 'development';
 
@@ -27,5 +27,8 @@ function fourOFour(req, res) {
     if ('development' === environment) {
         message = internalMessage;
     }
-    res.status(404).send(response.error(404, message)).end();
+    res
+        .status(404)
+        .send(response.error(404, message))
+        .end();
 }
