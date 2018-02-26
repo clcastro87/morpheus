@@ -22,18 +22,22 @@ function Controller(router) {
     routeMappings.forEach(enroute);
 
     function ignoreNonFunctions(p) {
-        if (p === 'constructor')
+        if (p === 'constructor') {
             return false;
-        return (typeof classProto[p] == 'function');
+        }
+        return (typeof classProto[p] === 'function');
     }
 
     function intelligentRouteSort(r1, r2) {
-        if (!r1.params || !r1.params.length)
+        if (!r1.params || !r1.params.length) {
             return -1;
-        if (!r2.params || !r2.params.length)
+        }
+        if (!r2.params || !r2.params.length) {
             return 1;
-        if (r1.params.length == r2.params.length)
+        }
+        if (r1.params.length === r2.params.length) {
             return 0;
+        }
         return r1.params.length > r2.params.length ? -1 : 1;
     }
 
@@ -45,7 +49,7 @@ function Controller(router) {
         if (methods.indexOf(prop) >= 0) {
             method = prop;
         }
-        else if (prop == 'getItem') {
+        else if (prop === 'getItem') {
             method = 'get';
         }
         else {
@@ -54,26 +58,33 @@ function Controller(router) {
         }
         var fnDec = classProto[prop].toString();
         var paramsMatch = fnDec.match(/\(([\w,\s]*)\)/);
-        var params = (paramsMatch && paramsMatch.index && paramsMatch[1]) 
-            ? paramsMatch[1].split(/\s*,\s*/) 
-            : [];
+        var params = (paramsMatch && paramsMatch.index && paramsMatch[1]) ? paramsMatch[1].split(/\s*,\s*/) : [];
         var url = baseRoute + routeAddition;
         return {
-            url: url += params.map(p => '/:' + p).join(''),
+            url: url += makeParamsDef(params),
             params: params,
             method: method,
             prop: prop
-        }
+        };
+    }
+
+    function makeParamsDef(params) {
+        return params.map(function (p) {
+            return '/:' + p;
+        })
+        .join('');
     }
 
     function enroute(routeDef) {
         debug('register route for verb: ' + routeDef.method + ', url = ' + routeDef.url);
         router[routeDef.method](routeDef.url, function (req, res, next) {
-            var vals = routeDef.params.map(p => req.params[p]);
+            var vals = routeDef.params.map(function (p) {
+                return req.params[p];
+            });
             debug('Dispatching request to: ' + className + '/' + routeDef.prop + ', with params: ' + vals);
             res.dispatch(classProto[routeDef.prop].apply({request: req, response: res}, vals));
         });
     }
 }
 
-module.exports = Controller
+module.exports = Controller;

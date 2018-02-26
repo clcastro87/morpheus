@@ -4,7 +4,6 @@
  *
  * @type {fourOFour}
  * @author: Carlos Luis Castro Márquez
- * 
  ************************/
 
 var response = require('./response');

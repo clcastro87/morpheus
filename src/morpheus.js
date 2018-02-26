@@ -100,11 +100,12 @@ function useControllers(path) {
 
     var router = express.Router();
 
-    for (var i = 0; i < files.length; i++){
+    for (var i = 0; i < files.length; i++) {
         var cPath = fs.realpathSync(rPath + '/' + files[i]);
         // TODO: Filter js files
-        var mod = require(cPath);
-        new mod(router);
+        var Ctrl = require(cPath);
+        /* jshint -W031 */
+        new Ctrl(router);
     }
 
     return router;
@@ -114,6 +115,7 @@ function morpheus(options) {
 
     options = options || {};
 
+    /* jshint -W055 */
     // Create express app.
     var app = new express();
 
