@@ -1,5 +1,6 @@
 var MockRes = require('mock-res');
 var util = require('util');
+var StatusCodes = require('http').STATUS_CODES;
 
 /**
  * Response prototype.
@@ -7,6 +8,9 @@ var util = require('util');
 
 function Response() {
     MockRes.call(this);
+
+    this.headersSent = false;
+    this.content = '';
 }
 
 util.inherits(Response, MockRes);
@@ -37,5 +41,25 @@ Response.prototype.set = function (field, val) {
 Response.prototype.get = function(field){
     return this.getHeader(field);
 };
+
+Response.prototype.status = function(statusCode) {
+    if (statusCode == undefined)
+        return this.statusCode;
+
+    this.statusCode = statusCode;
+    this.statusMessage = StatusCodes[statusCode];
+    this.headersSent = true;
+    return this;
+}
+
+Response.prototype.send = function(data) {
+    if (data.toString() == '[object Object]') 
+        this.content = JSON.stringify(data);
+    else
+        this.content = data;
+
+    this.write(this.content);
+    return this;
+}
 
 module.exports = Response;
