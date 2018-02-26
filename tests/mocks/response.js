@@ -62,4 +62,8 @@ Response.prototype.send = function(data) {
     return this;
 }
 
+Response.prototype.json = function(obj) {
+    return this.send(obj);
+}
+
 module.exports = Response;
