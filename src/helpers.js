@@ -13,7 +13,7 @@ function capitalize(str) {
 }
 
 function toCamelCase(str) {
-    let s =
+    var s =
         str &&
         str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
