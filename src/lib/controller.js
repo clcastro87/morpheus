@@ -68,7 +68,7 @@ function Controller(router, config) {
 
     function mapPropToRoute(prop) {
         debug('Generating route for fn: ' + prop);
-        var methods = ['get', 'post', 'put', 'del'];
+        var methods = ['get', 'post', 'put', 'delete'];
         var method = 'get';
         var routeAddition = '';
         if (methods.indexOf(prop) >= 0) {

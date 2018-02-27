@@ -18,12 +18,16 @@ CustomNameController.prototype.getItem = function(id) {
     return promise;
 };
 
-CustomNameController.prototype.testParam = function(id, mod) {
-    var promise = new Promise(function (resolve, reject) {
-        resolve({username: id, module: mod});
-    });
+CustomNameController.prototype.post = function() {
+    return this.request;
+};
 
-    return promise;
+CustomNameController.prototype.put = function(id) {
+    return this.request;
+};
+
+CustomNameController.prototype.delete = function(id) {
+    return this.request;
 };
 
 CustomNameController.prototype.findUser = function() {
