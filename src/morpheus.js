@@ -102,7 +102,9 @@ function useControllers(path) {
 
     for (var i = 0; i < files.length; i++) {
         var cPath = fs.realpathSync(rPath + '/' + files[i]);
-        // TODO: Filter js files
+        if (!cPath.match(/.js$/)) {
+            continue;
+        }
         var Ctrl = require(cPath);
         /* jshint -W031 */
         new Ctrl(router);
