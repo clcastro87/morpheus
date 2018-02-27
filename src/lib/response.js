@@ -49,21 +49,6 @@
     }
 
     /**
-     * Builds an automatic response based on common callback response function.
-     * If an error is sent as first parameter, then is a response error,
-     * otherwise returns a success response.
-     *
-     * @param {Error} err Callback error, if code is set then result is an empty object.
-     * @param {Object} result Callback result.
-     * */
-    function fromCallback(err, result) {
-        if (err) {
-            return error(err.statusCode || 500, err.message || 'Internal Server Error');
-        }
-        return success(result);
-    }
-
-    /**
      * Builds an automatic response based on HttpStatus Object.
      * Also you can send a customized error if description param is set.
      *
