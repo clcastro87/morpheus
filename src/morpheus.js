@@ -93,7 +93,8 @@ function setMethodOverride(key) {
     return methodOverride(key);
 }
 
-function useControllers(path) {
+function useControllers(path, config) {
+    config = config || {};
     var fs = require('fs');
     var rPath = fs.realpathSync(path);
     var files = fs.readdirSync(rPath);
@@ -107,7 +108,7 @@ function useControllers(path) {
         }
         var Ctrl = require(cPath);
         /* jshint -W031 */
-        new Ctrl(router);
+        new Ctrl(router, config);
     }
 
     return router;

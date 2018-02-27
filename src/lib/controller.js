@@ -4,7 +4,8 @@ const DEBUG_SIGNATURE = 'morpheus.controller';
 var debug = require('debug')(DEBUG_SIGNATURE);
 var helpers = require('../helpers');
 
-function Controller(router) {
+function Controller(router, config) {
+    config = config || {};
     var classProto = Object.getPrototypeOf(this);
     var className = classProto['constructor'].name;
     debug('Registering controller for class: ' + className);

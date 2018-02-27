@@ -1,8 +1,8 @@
 var Promise = require('bluebird');
 var Controller = require('../../index').Controller;
 
-function HomeController(router) {
-    Controller.call(this, router);
+function HomeController(router, config) {
+    Controller.call(this, router, config);
 }
 
 HomeController.prototype.get = function() {
