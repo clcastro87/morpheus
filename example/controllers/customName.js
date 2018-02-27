@@ -1,15 +1,15 @@
 var Promise = require('bluebird');
 var Controller = require('../../index').Controller;
 
-function HomeController(router, config) {
+function CustomNameController(router, config) {
     Controller.call(this, router, config);
 }
 
-HomeController.prototype.get = function() {
+CustomNameController.prototype.get = function() {
     return {hola: 'Mundodddd'};
 };
 
-HomeController.prototype.getItem = function(id) {
+CustomNameController.prototype.getItem = function(id) {
     var request = this.request;
     var promise = new Promise(function (resolve, reject) {
         resolve({hola: id, q: request.query});
@@ -18,15 +18,19 @@ HomeController.prototype.getItem = function(id) {
     return promise;
 };
 
-HomeController.prototype.testParam = function(id, mod) {
-    var promise = new Promise(function (resolve, reject) {
-        resolve({username: id, module: mod});
-    });
-
-    return promise;
+CustomNameController.prototype.post = function() {
+    return this.request;
 };
 
-HomeController.prototype.findUser = function() {
+CustomNameController.prototype.put = function(id) {
+    return this.request;
+};
+
+CustomNameController.prototype.delete = function(id) {
+    return this.request;
+};
+
+CustomNameController.prototype.findUser = function() {
     var request = this.request;
     var name = request.query.name || '';
     var promise = new Promise(function (resolve, reject) {
@@ -36,4 +40,4 @@ HomeController.prototype.findUser = function() {
     return promise;
 };
 
-module.exports = HomeController;
+module.exports = CustomNameController;

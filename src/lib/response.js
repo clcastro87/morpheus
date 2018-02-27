@@ -10,7 +10,6 @@
     response.success = success;
     response.error = error;
     response.makeResponse = makeResponse;
-    response.fromCallback = fromCallback;
     response.fromHttpStatus = fromHttpStatus;
 
     /**
@@ -43,25 +42,10 @@
         return {
             status: {
                 code: code || 200,
-                description: description || 'success'
+                description: description || 'OK'
             },
-            result: result === undefined ? {} : result
+            result: result === undefined ? null : result
         };
-    }
-
-    /**
-     * Builds an automatic response based on common callback response function.
-     * If an error is sent as first parameter, then is a response error,
-     * otherwise returns a success response.
-     *
-     * @param {Error} err Callback error, if code is set then result is an empty object.
-     * @param {Object} result Callback result.
-     * */
-    function fromCallback(err, result) {
-        if (err) {
-            return error(err.statusCode || 500, err.message || 'Internal Server Error');
-        }
-        return success(result);
     }
 
     /**

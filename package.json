@@ -1,6 +1,6 @@
 {
   "name": "morpheus",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "bluebird": "^3.3.4",
+    "debug": "^2.0.0",
     "lodash": "^2.4.1",
     "express": "^4.9.3",
     "compression": "^1.6.0",
@@ -34,8 +35,7 @@
     "method-override": "^1.0.2",
     "express-cache-ctrl": "^1.0.1"
   },
-  "devDependencies": {
-    "debug": "^2.0.0",
+  "devDependencies": {    
     "morgan": "^1.1.1",
     "gulp": "^3.8.10",
     "gulp-jscs": "^1.1.2",
@@ -44,6 +44,8 @@
     "gulp-util": "^3.0.1",
     "jshint-stylish": "^1.0.0",
     "mocha": "^1.21.5",
+    "mock-req": "^0.1.0",
+    "mock-res": "^0.5.0",
     "supertest": "^1.1.0",
     "chai": "^1.10.0"
   }

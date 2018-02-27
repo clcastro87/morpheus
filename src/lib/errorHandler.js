@@ -12,7 +12,6 @@
  *
  * @type {errorHandler}
  * @author: Carlos Luis Castro Márquez
- * 
  ************************/
 
 var response = require('./response');
@@ -40,12 +39,12 @@ function errorHandler(err, req, res, next) {
                 .status(status)
                 .send(response.error(status, body))
                 .end();
-        }        
+        }
         logError(err, status, body);
     }
     else {
         res.end();
-    }    
+    }
 }
 
 function logError(err, status, body) {
