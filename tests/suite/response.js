@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var response = require('../../src/lib/response');
 var Status = require('../../index').Status;
 
-describe.only('Response Handler', function () {
+describe('Response Handler', function () {
 
     describe('constructor', function () {
         expect(response).to.not.null();
