@@ -7,7 +7,7 @@ function HomeController(router) {
 
 HomeController.prototype.get = function() {
     return {hola: 'Mundodddd'};
-}
+};
 
 HomeController.prototype.getItem = function(id) {
     var request = this.request;
@@ -16,7 +16,7 @@ HomeController.prototype.getItem = function(id) {
     });
 
     return promise;
-}
+};
 
 HomeController.prototype.testParam = function(id, mod) {
     var promise = new Promise(function (resolve, reject) {
@@ -24,7 +24,7 @@ HomeController.prototype.testParam = function(id, mod) {
     });
 
     return promise;
-}
+};
 
 HomeController.prototype.findUser = function() {
     var request = this.request;
@@ -34,6 +34,6 @@ HomeController.prototype.findUser = function() {
     });
 
     return promise;
-}
+};
 
 module.exports = HomeController;
