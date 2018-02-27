@@ -1,6 +1,6 @@
 {
   "name": "morpheus",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
   "scripts": {
