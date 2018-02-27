@@ -45,7 +45,7 @@
                 code: code || 200,
                 description: description || 'success'
             },
-            result: result === undefined ? {} : result
+            result: result === undefined ? null : result
         };
     }
 
