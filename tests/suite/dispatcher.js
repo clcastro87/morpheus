@@ -3,6 +3,7 @@ var Dispatcher = require('../../src/lib/dispatcher');
 var errorHandler = require('../../src/lib/errorHandler');
 var Status = require('../../index').Status;
 var Response = require('../mocks/response');
+var Promise = require('bluebird');
 
 describe('Dispatcher middleware', function () {
 
@@ -45,7 +46,7 @@ describe('Dispatcher middleware', function () {
         expect(jsForm.result).to.null();
     });
 
-    it('Dispatch hello', function () {
+    it('Dispatch Object', function () {
         var middleware = new Dispatcher({});
         var res = new Response();
         middleware.call(middleware, {}, res, function (){});
@@ -167,5 +168,85 @@ describe('Dispatcher middleware', function () {
         expect(jsForm.status.code).to.be.eql(500);
         expect(jsForm.status.description).to.not.null();
         expect(jsForm.result).to.null();
+    });
+
+    it('Dispatch Promise Result', function (done) {
+        var middleware = new Dispatcher({});
+        var res = new Response();
+        middleware.call(middleware, {}, res, function (err) {
+            if (err instanceof Error) {
+                errorHandler.call(errorHandler, err, {}, res, function (){});
+            }
+        });
+        expect(res).to.respondTo('dispatch');
+
+        var promise = new Promise(function (resolve, reject) {
+            resolve({hello: 'World'});
+        });
+        promise.then(function() {
+            setTimeout(function () {
+                var resp = {
+                    statusCode: res.statusCode,
+                    statusMessage: res.statusMessage,
+                    content: res.content,
+                    headersSent: res.headersSent
+                };
+                expect(resp).to.be.an('object');
+                expect(resp.headersSent).to.be.eql(true);
+                expect(resp.statusCode).to.be.eql(200);
+                expect(resp.statusMessage).to.be.eql('OK');
+                var content = resp.content;
+                expect(content).to.not.null();
+                var jsForm = JSON.parse(content);
+                expect(jsForm).to.be.an('object');
+                expect(jsForm.status).to.be.an('object');
+                expect(jsForm.status.code).to.be.eql(200);
+                expect(jsForm.status.description).to.not.null();
+                expect(jsForm.result).to.not.null();
+                expect(jsForm.result).to.be.an('object');
+                expect(jsForm.result).to.have.property('hello').and.equal('World');
+                done();
+            }, 3);
+        });
+        res.dispatch(promise);
+    });
+
+    it('Dispatch Promise Error', function (done) {
+        var middleware = new Dispatcher({});
+        var res = new Response();
+        middleware.call(middleware, {}, res, function (err) {
+            if (err instanceof Error) {
+                errorHandler.call(errorHandler, err, {}, res, function (){});
+            }
+        });
+        expect(res).to.respondTo('dispatch');
+
+        var promise = new Promise(function (resolve, reject) {
+            reject(new Error("This is an error."));
+        });
+        promise.catch(function() {
+            setTimeout(function () {
+                var resp = {
+                    statusCode: res.statusCode,
+                    statusMessage: res.statusMessage,
+                    content: res.content,
+                    headersSent: res.headersSent
+                };
+                expect(resp).to.be.an('object');
+                expect(resp.headersSent).to.be.eql(true);
+                expect(resp.statusCode).to.be.eql(500);
+                expect(resp.statusMessage).to.be.eql('Internal Server Error');
+                var content = res.content;
+                expect(content).to.not.null();
+                var jsForm = JSON.parse(content);
+                expect(jsForm).to.be.an('object');
+                expect(jsForm.status).to.be.an('object');
+                expect(jsForm.status.code).to.be.eql(500);
+                expect(jsForm.status.description).to.not.null();
+                expect(jsForm.result).to.null();
+                done();
+            }, 3);
+        });
+        res.dispatch(promise);
     });
 });
