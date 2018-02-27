@@ -10,7 +10,6 @@
     response.success = success;
     response.error = error;
     response.makeResponse = makeResponse;
-    response.fromCallback = fromCallback;
     response.fromHttpStatus = fromHttpStatus;
 
     /**
@@ -43,7 +42,7 @@
         return {
             status: {
                 code: code || 200,
-                description: description || 'success'
+                description: description || 'OK'
             },
             result: result === undefined ? null : result
         };
