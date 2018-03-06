@@ -7,3 +7,6 @@ node_js:
 install:
   - npm install mocha -g
   - npm install
+branches:
+  only:
+  - master
