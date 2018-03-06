@@ -1,8 +1,10 @@
 # morpheus
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status](https://travis-ci.org/clcastro87/morpheus.svg?branch=master)](https://travis-ci.org/clcastro87/morpheus)
+[![Issues](https://img.shields.io/github/issues/clcastro87/morpheus.svg)](https://travis-ci.org/clcastro87/morpheus)
+[![GitHub forks](https://img.shields.io/github/forks/clcastro87/morpheus.svg)](https://github.com/clcastro87/morpheus/network)
+[![GitHub stars](https://img.shields.io/github/stars/clcastro87/morpheus.svg)](https://github.com/clcastro87/morpheus/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/clcastro87/morpheus/master/LICENSE)
 
 [Express](http://expressjs.com/) pluggable REST API, built in the right way. It always use a common convention in API responses, making the usage ideal for fast and secure development. You can use Promises, Callbacks, all what you want in single method call. It also supports MVC, using fancy controllers.
 
