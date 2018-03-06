@@ -1,7 +1,7 @@
 # morpheus
 
-[comment]: <> [![NPM Version][npm-image]][npm-url]
-[comment]: <> [![NPM Downloads][downloads-image]][downloads-url]
+[//]: # [![NPM Version][npm-image]][npm-url]
+[//]: # [![NPM Downloads][downloads-image]][downloads-url]
 
 [![Build Status](https://travis-ci.org/clcastro87/morpheus.svg?branch=master)](https://travis-ci.org/clcastro87/morpheus)
 [![Issues](https://img.shields.io/github/issues/clcastro87/morpheus.svg)](https://travis-ci.org/clcastro87/morpheus)
