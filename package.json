@@ -1,5 +1,5 @@
 {
-  "name": "morpheus",
+  "name": "restier",
   "version": "0.0.6",
   "description": "Express pluggable REST API, built in the right way.",
   "main": "index.js",
@@ -18,7 +18,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clcastro87/morpheus"
+    "url": "https://github.com/clcastro87/restier"
   },
   "engines": {
     "node": ">= 4.0.0"

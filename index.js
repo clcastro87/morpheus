@@ -4,4 +4,4 @@
  * @author: Carlos Luis Castro Márquez
  */
 'use strict';
-module.exports = require('./src/morpheus');
+module.exports = require('./src/main');

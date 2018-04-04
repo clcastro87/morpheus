@@ -114,7 +114,7 @@ function useControllers(path, config) {
     return router;
 }
 
-function morpheus(options) {
+function restier(options) {
 
     options = options || {};
 
@@ -156,7 +156,7 @@ function morpheus(options) {
 }
 
 // Module exports
-module.exports = exports = morpheus;
+module.exports = exports = restier;
 exports.cache = cache;
 exports.compression = compression;
 exports.helmet = helmet;

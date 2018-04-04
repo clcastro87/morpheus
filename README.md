@@ -1,10 +1,10 @@
-# morpheus
+# restier
 
-[![Build Status](https://travis-ci.org/clcastro87/morpheus.svg?branch=master)](https://travis-ci.org/clcastro87/morpheus)
-[![Issues](https://img.shields.io/github/issues/clcastro87/morpheus.svg)](https://travis-ci.org/clcastro87/morpheus)
-[![GitHub forks](https://img.shields.io/github/forks/clcastro87/morpheus.svg)](https://github.com/clcastro87/morpheus/network)
-[![GitHub stars](https://img.shields.io/github/stars/clcastro87/morpheus.svg)](https://github.com/clcastro87/morpheus/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/clcastro87/morpheus/master/LICENSE)
+[![Build Status](https://travis-ci.org/clcastro87/restier.svg?branch=master)](https://travis-ci.org/clcastro87/restier)
+[![Issues](https://img.shields.io/github/issues/clcastro87/restier.svg)](https://travis-ci.org/clcastro87/restier)
+[![GitHub forks](https://img.shields.io/github/forks/clcastro87/restier.svg)](https://github.com/clcastro87/restier/network)
+[![GitHub stars](https://img.shields.io/github/stars/clcastro87/restier.svg)](https://github.com/clcastro87/restier/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/clcastro87/restier/master/LICENSE)
 
 [Express](http://expressjs.com/) pluggable REST API, built in the right way. It always use a common convention in API responses, making the usage ideal for fast and secure development. You can use Promises, Callbacks, all what you want in single method call. It also supports MVC, using fancy controllers.
 
@@ -24,8 +24,8 @@
 ## Quick Start
 
 ```js
-var morpheus = require('morpheus');
-var api = morpheus();
+var restier = require('restier');
+var api = restier();
 var router = api.router;
 var Promise = require('bluebird');
 
@@ -74,14 +74,14 @@ app.listen(4000);
 ## Install
 
 ```bash
-$ npm install morpheus
+$ npm install restier
 ```
 
 ## API
 
 ```js
-var morpheus = require('morpheus');
-var api = morpheus();
+var restier = require('restier');
+var api = restier();
 ```
 
 ### router
@@ -98,11 +98,11 @@ router.get('/hello', function (req, res, next) {
 
 ### Constructor ([options])
 
-Returns morpheus object.
+Returns restier object.
 
 #### Options
 
-`morpheus()` accepts these properties in the options object. 
+`restier()` accepts these properties in the options object. 
 
 ##### poweredBy
 
@@ -122,7 +122,7 @@ Options for `cors` module. Defaults to `false`, or cors disabled.
 
 ##### bodyParser
 
-Options for `bodyParser` module. If configuration is specified it will be merged with morpheus default options described below.
+Options for `bodyParser` module. If configuration is specified it will be merged with restier default options described below.
 
 ```js
 var defaultOptions = {
@@ -167,7 +167,7 @@ app.listen(4000);
 
 ### useControllers(controllersDir)
 
-Returns a morpheus router, with routes mounted for controllers located in the specified directory. This method uses realpath for determining the correct path for looking out controllers. 
+Returns a restier router, with routes mounted for controllers located in the specified directory. This method uses realpath for determining the correct path for looking out controllers. 
 
 ```js
 router.use('/', api.useControllers(__dirname + '/controllers'));
@@ -176,7 +176,7 @@ router.use('/', api.useControllers(__dirname + '/controllers'));
 #### Controller Example
 ```js
 var Promise = require('bluebird');
-var Controller = require('morpheus').Controller;
+var Controller = require('restier').Controller;
 
 function HomeController(router) {
     Controller.call(this, router);
@@ -210,7 +210,7 @@ $ npm test
 
 ## People
 
-The original author of Morpheus is [Carlos Luis Castro Márquez](https://github.com/clcastro87)
+The original author of Restier is [Carlos Luis Castro Márquez](https://github.com/clcastro87)
 
 ## License
 

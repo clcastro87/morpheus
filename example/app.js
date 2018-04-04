@@ -6,7 +6,7 @@ var apiV1 = require('./config/routes');
 var app = express();
 // Using morgan
 app.use(logger('dev'));
-// Registering morpheus app.
+// Registering restier app.
 app.use('/api/v1', apiV1);
 // Listen on 4000
 app.listen(4000);

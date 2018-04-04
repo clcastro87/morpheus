@@ -1,6 +1,6 @@
 var response = require('./response');
 var Status = require('./status');
-const DEBUG_SIGNATURE = 'morpheus.dispatcher';
+const DEBUG_SIGNATURE = 'restier.dispatcher';
 var debug = require('debug')(DEBUG_SIGNATURE);
 
 module.exports = function(config) {

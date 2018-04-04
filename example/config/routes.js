@@ -1,9 +1,9 @@
-var morpheus = require('../../index');
-var api = morpheus();
+var restier = require('../../index');
+var api = restier();
 var router = api.router;
 
 var helloRoutes = require('../routes/hello');
-router.get('/hello', morpheus.cache.public(3600), helloRoutes.hello);
+router.get('/hello', restier.cache.public(3600), helloRoutes.hello);
 router.get('/exception', helloRoutes.exception);
 router.get('/error', helloRoutes.exception2);
 
