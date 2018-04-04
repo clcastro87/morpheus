@@ -16,7 +16,7 @@
 
 var response = require('./response');
 var debug = require('debug');
-const DEBUG_SIGNATURE = 'morpheus.middleware.error';
+const DEBUG_SIGNATURE = 'restier.middleware.error';
 var error = debug(DEBUG_SIGNATURE);
 error.log = console.error.bind(console);
 var environment = (process.env && process.env.NODE_ENV) || 'development';

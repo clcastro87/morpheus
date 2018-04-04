@@ -7,7 +7,7 @@
  ************************/
 
 var response = require('./response');
-const DEBUG_SIGNATURE = 'morpheus.middleware.notFound';
+const DEBUG_SIGNATURE = 'restier.middleware.notFound';
 var debug = require('debug')(DEBUG_SIGNATURE);
 var environment = (process.env && process.env.NODE_ENV) || 'development';
 

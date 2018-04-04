@@ -1,6 +1,6 @@
 'use strict';
 
-const DEBUG_SIGNATURE = 'morpheus.controller';
+const DEBUG_SIGNATURE = 'restier.controller';
 var debug = require('debug')(DEBUG_SIGNATURE);
 var helpers = require('../helpers');
 
